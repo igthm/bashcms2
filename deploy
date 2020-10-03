@@ -3,6 +3,7 @@ source "$(dirname $0)/bin/conf"
 
 [ "$USER" = "root" ] # USER MUST BE ROOT
 
+### CREATE DIRECTORIES ###
 mkdir -p "$logdir" "$datadir" "$datadir/counters"
 chown www-data:www-data "$logdir" "$datadir" "$datadir/counters"
 
@@ -13,7 +14,7 @@ chown www-data:www-data "$appdir" -R
 ### RENAME FETCH CGI ###
 cd "$appdir"
 rnd=$(cat /dev/urandom | tr -cd 0-9a-zA-Z | head -c 32)
-[ -e "/home/pi/rnd" ] && rnd=$(cat /home/pi/rnd) #REMOVE ON RELEASE!!!
+[ -e "/rnd" ] && rnd=$(cat /rnd) #REMOVE ON RELEASE!!!
 mv "fetch" "fetch_$rnd.cgi"
 
 ### PULL ARTICLE REPO ###
